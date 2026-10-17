@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>J.A.R.V.I.S — Master Blueprint</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+
+    :root {
+      --bg: #020710;
+      --panel: rgba(10, 20, 35, 0.7);
+      --cyan: #00e5ff;
+      --text: #e0f2fe;
+      --muted: #8fa8b6;
+      --green: #00ff88;
+      --orange: #ffaa00;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg); 
+      color: var(--text); 
+      min-height: 100vh; 
+      padding: 30px 20px; 
+      background-image: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.1), transparent 60%);
+    }
+    
+    .container { max-width: 900px; margin: 0 auto; }
+    
+    /* Header */
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-family: 'Orbitron', sans-serif; font-size: 32px; letter-spacing: 4px; color: #fff; text-shadow: 0 0 20px var(--cyan); margin-bottom: 10px; }
+    .header p { color: var(--muted); font-size: 14px; letter-spacing: 1px; }
+    
+    /* Status Bar */
+    .status-bar { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+    .badge { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; font-family: 'Share Tech Mono', monospace; }
+    .badge-green { background: rgba(0, 255, 136, 0.1); color: var(--green); border: 1px solid rgba(0, 255, 136, 0.3); }
+    .badge-cyan { background: rgba(0, 229, 255, 0.1); color: var(--cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
+    .badge-orange { background: rgba(255, 170, 0, 0.1); color: var(--orange); border: 1px solid rgba(255, 170, 0, 0.3); }
+
+    /* Grid Layout */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    
+    /* Panels */
+    .panel { 
+      background: var(--panel); 
+      border: 1px solid rgba(0, 229, 255, 0.15); 
+      border-radius: 12px; 
+      padding: 25px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+    }
+    .panel h2 { 
+      font-family: 'Orbitron', sans-serif; 
+      font-size: 18px; 
+      color: var(--cyan); 
+      margin-bottom: 20px; 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      border-bottom: 1px solid rgba(0, 229, 255, 0.1); 
+      padding-bottom: 12px; 
+    }
+    
+    /* Lists */
+    ul { list-style: none; }
+    li { 
+      display: flex; 
+      align-items: flex-start; 
+      gap: 12px; 
+      font-size: 14px; 
+      color: #b0c5d3; 
+      margin-bottom: 15px; 
+      line-height: 1.6; 
+    }
+    li strong { color: #fff; font-weight: 600; }
+    .icon-done { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+    .icon-pending { color: var(--orange); flex-shrink: 0; margin-top: 2px; }
+    .icon-future { color: #555; flex-shrink: 0; margin-top: 2px; }
+
+    /* Warning Box */
+    .warning-box { 
+      border-left: 4px solid var(--orange); 
+      background: rgba(255, 170, 0, 0.05); 
+      padding: 20px; 
+      border-radius: 0 8px 8px 0; 
+      margin-top: 20px;
+    }
+    .warning-box h3 { color: var(--orange); font-size: 16px; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; }
+    .warning-box p { font-size: 13px; color: #b0c5d3; line-height: 1.6; }
+
+    /* Tech Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .tag { 
+      background: rgba(0, 229, 255, 0.05); 
+      color: var(--cyan); 
+      border: 1px solid rgba(0, 229, 255, 0.2); 
+      padding: 6px 12px; 
+      border-radius: 6px; 
+      font-size: 12px; 
+      font-family: 'Share Tech Mono', monospace; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <h1>MASTER BLUEPRINT</h1>
+      <p>J.A.R.V.I.S. — Personal AI Assistant System</p>
+      <div class="status-bar">
+        <span class="badge badge-green">STATUS: LIVE</span>
+        <span class="badge badge-cyan">UI: CINEMATIC HUD</span>
+        <span class="badge badge-orange">VOICE: FIXED</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- 1. TECH STACK -->
+      <div class="panel">
+        <h2>⚙️ Tech Stack & Architecture</h2>
+        <ul>
+          <li><span class="icon-done">✔</span> <div><strong>Frontend:</strong> HTML5, Advanced CSS3 (Glassmorphism, 3D Transforms), Vanilla JavaScript (ES6)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Core Animation:</strong> Custom SVG और Canvas (वॉइस वेव्स और रिएक्टर कोर के लिए)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Authentication:</strong> Firebase (Google Auth + Persistent Login)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Backend:</strong> Node.js + Express.js (Render पर होस्टेड)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>AI Engine:</strong> Google Gemini API (Smart Fallback System के साथ)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Voice Interface:</strong> Web Speech API (STT और TTS के लिए)।</div></li>
+        </ul>
+        <div class="tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">Vanilla JS</span>
+          <span class="tag">SVG</span>
+          <span class="tag">Canvas</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Gemini API</span>
+        </div>
+      </div>
+
+      <!-- 2. COMPLETED TASKS -->
+      <div class="panel">
+        <h2>✅ Completed Features (Phase 1 & 2)</h2>
+        <ul>
+          <li><span class="icon-done">✔</span> <div><strong>Firebase Auth:</strong> Google Login पूरी तरह काम कर रहा है (Persistent)।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Firestore Sync:</strong> लॉगिन करते ही डेटा क्लाउड में सिंक हो जाता है।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>SVG 3D Reactor Core:</strong> घूमता हुआ होलोग्राम कोर और डेटा रिंग्स।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Voice Wave Canvas:</strong> बोलते समय रिएक्टर के चारों ओर वेव एनिमेशन।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Chat Terminal:</strong> क्लासिक HUD स्टाइल में चैट इंटरफ़ेस।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Hey Jarvis Bug Fix:</strong> माइक के बार-बार ऑन-ऑफ होने वाला लूप फिक्स कर दिया गया है।</div></li>
+          <li><span class="icon-done">✔</span> <div><strong>Voice Output (TTS):</strong> JARVIS का जवाब आवाज़ में सुनाई देता है।</div></li>
+        </ul>
+      </div>
+
+      <!-- 3. PENDING BUGS -->
+      <div class="panel">
+        <h2>🚧 Pending Bugs (Fix First)</h2>
+        <ul>
+          <li><span class="icon-pending">◉</span> <div><strong>Haze Service:</strong> यह सर्विस अभी काम नहीं कर रही है और इसे डीबग करना बाकी है।</div></li>
+          <li><span class="icon-pending">◉</span> <div><strong>Render Cold Start:</strong> सर्वर 15 मिनट बाद सो जाता है (इसे cron-job.org से फिक्स करना है)।</div></li>
+        </ul>
+      </div>
+
+      <!-- 4. NEXT ROADMAP -->
+      <div class="panel">
+        <h2>🚀 Next Roadmap (Phase 3 & 4)</h2>
+        <ul>
+          <li><span class="icon-future">○</span> <div><strong>Context Memory:</strong> JARVIS को पिछले 5-10 मैसेज याद रखने की क्षमता देना।</div></li>
+          <li><span class="icon-future">○</span> <div><strong>Personal Knowledge Base:</strong> इसमें "MCU Tracker" और "SineVault" की जानकारी डालना ताकि यह पर्सनल असिस्टेंट बने।</div></li>
+          <li><span class="icon-future">○</span> <div><strong>Function Calling:</strong> JARVIS को आपके बाकी प्रोजेक्ट्स के API से जोड़ना।</div></li>
+          <li><span class="icon-future">○</span> <div><strong>Multi-Language:</strong> हिंदी भाषा का सपोर्ट जोड़ना।</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. AI GUIDELINES -->
+    <div class="warning-box">
+      <h3>🤖 Instructions for Next AI Assistant</h3>
+      <p>1. <strong>Security:</strong> API Keys (Gemini/Firebase) को कभी भी फ्रंटएंड (<code>app.js</code>) में हार्डकोड न करें। उन्हें हमेशा Render के Environment Variables में रखें।<br><br>
+      2. <strong>DOM Safety:</strong> <code>app.js</code> में किसी भी एलिमेंट को एक्सेस करते समय <code>if ($("id"))</code> का इस्तेमाल करें ताकि पेज क्रैश (Black Screen) न हो।<br><br>
+      3. <strong>UI/UX:</strong> डिज़ाइन में हमेशा डार्क ब्लू (<code>#050b14</code>), सियान नियॉन (<code>#00e5ff</code>), और मोनोस्पेस फॉन्ट्स का इस्तेमाल करें। इस सिनेमैटिक लुक को बनाए रखें।<br><br>
+      4. <strong>Mic Logic:</strong> "Hey Jarvis" वाले लॉजिक को बहुत सावधानी से बदलें। इसमें <code>recognition.onend</code> और <code>recognition.stop()</code> का सही बैलेंस है ताकि वह लूप में न फँसे।</p>
+    </div>
+  </div>
+</body>
+</html>
