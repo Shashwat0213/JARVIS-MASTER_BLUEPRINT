@@ -3,54 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JARVIS AI — Master Blueprint</title>
+  <title>JARVIS AI — Master Blueprint (A to Z)</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #03070a; color: #e9f7ff; min-height: 100vh; padding: 30px 20px; }
-    .bg-glow { position: fixed; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(0,170,255,0.1), transparent 60%); z-index: -1; }
-    .container { max-width: 900px; margin: 0 auto; }
+    body { font-family: 'Share Tech Mono', monospace; background: #01040a; color: #00e5ff; min-height: 100vh; padding: 30px 20px; }
+    .bg-glow { position: fixed; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.1), transparent 60%); z-index: -1; }
+    .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 10; }
     
     /* Header */
-    .header { text-align: center; margin-bottom: 40px; }
-    .header h1 { font-family: 'Orbitron', sans-serif; font-size: 28px; letter-spacing: 2px; color: #fff; text-shadow: 0 0 15px rgba(0,170,255,0.5); margin-bottom: 10px; }
-    .header p { color: #8fa8b6; font-size: 14px; }
+    .header { text-align: center; margin-bottom: 40px; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 20px; }
+    .header h1 { font-family: 'Orbitron', sans-serif; font-size: 28px; letter-spacing: 3px; color: #fff; text-shadow: 0 0 15px rgba(0,229,255,0.5); margin-bottom: 10px; }
+    .header p { color: #557a8c; font-size: 14px; }
     
     /* Progress Bar */
-    .progress-container { background: rgba(10,15,25,0.7); border: 1px solid rgba(0,170,255,0.2); padding: 20px; border-radius: 12px; margin-bottom: 30px; }
+    .progress-wrapper { background: rgba(0, 10, 20, 0.7); border: 1px solid rgba(0, 229, 255, 0.3); padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05); }
     .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .progress-header h2 { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #00aaff; margin: 0; }
-    .progress-header span { font-family: 'Orbitron', sans-serif; font-size: 18px; color: #00ff88; font-weight: bold; }
-    .progress-bar-bg { width: 100%; height: 12px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #00aaff, #00ff88); width: 0%; transition: width 0.5s ease-in-out; box-shadow: 0 0 10px #00ff88; }
+    .progress-header h2 { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #00e5ff; margin: 0; }
+    .progress-header span { font-family: 'Orbitron', sans-serif; font-size: 20px; color: #00ff88; font-weight: bold; text-shadow: 0 0 10px #00ff88; }
+    .progress-bar-bg { width: 100%; height: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #00e5ff, #00ff88); width: 0%; transition: width 0.4s ease-in-out; box-shadow: 0 0 10px #00ff88; }
 
     /* Grid Layout */
-    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     
     /* Panels */
-    .panel { background: rgba(10,15,25,0.7); border: 1px solid rgba(0,150,255,0.15); border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-    .panel h3 { font-family: 'Orbitron', sans-serif; font-size: 15px; color: #fff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0,170,255,0.1); padding-bottom: 10px; }
+    .panel { background: rgba(0, 10, 20, 0.6); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 8px; padding: 20px; box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.05); position: relative; }
+    .panel::before { content: ''; position: absolute; top: -1px; left: -1px; width: 15px; height: 15px; border-top: 2px solid #00e5ff; border-left: 2px solid #00e5ff; }
+    .panel::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 15px; height: 15px; border-bottom: 2px solid #00e5ff; border-right: 2px solid #00e5ff; }
+    
+    .panel h3 { font-family: 'Orbitron', sans-serif; font-size: 14px; color: #fff; margin-bottom: 15px; border-bottom: 1px solid rgba(0, 229, 255, 0.2); padding-bottom: 10px; letter-spacing: 1px; }
     
     /* Interactive Lists */
     ul { list-style: none; }
-    li { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #b0c5d3; margin-bottom: 15px; line-height: 1.5; cursor: pointer; transition: 0.2s; padding: 5px; border-radius: 6px; }
-    li:hover { background: rgba(255,255,255,0.03); }
-    li strong { color: #fff; display: block; margin-bottom: 2px; }
+    li { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #8fb3c9; margin-bottom: 15px; line-height: 1.5; cursor: pointer; transition: 0.2s; padding: 5px; border-radius: 4px; }
+    li:hover { background: rgba(0, 229, 255, 0.05); }
+    li strong { color: #00e5ff; display: block; margin-bottom: 3px; font-family: 'Orbitron', sans-serif; font-size: 12px; }
     
     /* Custom Checkbox */
-    .checkbox { width: 18px; height: 18px; border: 2px solid #00aaff; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; transition: 0.2s; }
+    .checkbox { width: 18px; height: 18px; border: 1px solid #00e5ff; border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; transition: 0.2s; background: rgba(0,0,0,0.3); }
     .checkbox svg { width: 12px; height: 12px; opacity: 0; transform: scale(0.5); transition: 0.2s; stroke: #000; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
     
     /* Checked State */
-    li.checked .checkbox { background: #00ff88; border-color: #00ff88; }
+    li.checked .checkbox { background: #00ff88; border-color: #00ff88; box-shadow: 0 0 10px rgba(0,255,136,0.5); }
     li.checked .checkbox svg { opacity: 1; transform: scale(1); }
-    li.checked strong, li.checked div { text-decoration: line-through; color: #555; }
-    li.checked { opacity: 0.7; }
+    li.checked strong, li.checked div span { text-decoration: line-through; color: #445566; }
+    li.checked { opacity: 0.6; }
 
-    /* Warning Panel */
-    .warning-panel { border-color: rgba(255,170,0,0.3); background: rgba(255,170,0,0.05); margin-top: 20px; }
-    .warning-panel h3 { color: #ffaa00; border-bottom-color: rgba(255,170,0,0.2); }
+    /* Code Notes Box */
+    .ai-notes { background: rgba(255, 170, 0, 0.05); border-color: rgba(255, 170, 0, 0.3); margin-top: 25px; grid-column: 1 / -1; }
+    .ai-notes h3 { color: #ffaa00; border-bottom-color: rgba(255, 170, 0, 0.2); }
+    .ai-notes li strong { color: #ffaa00; }
 
     @media(max-width: 768px) {
       .dashboard-grid { grid-template-columns: 1fr; }
@@ -59,17 +63,17 @@
 </head>
 <body>
   <div class="bg-glow"></div>
-
   <div class="container">
+    
     <div class="header">
-      <h1>MASTER BLUEPRINT</h1>
-      <p>JARVIS AI — Project Tracker & Roadmap</p>
+      <h1>J.A.R.V.I.S — MASTER BLUEPRINT</h1>
+      <p>Complete A to Z System Architecture & Roadmap</p>
     </div>
 
     <!-- PROGRESS BAR -->
-    <div class="progress-container">
+    <div class="progress-wrapper">
       <div class="progress-header">
-        <h2>Overall Project Progress</h2>
+        <h2>DEVELOPMENT PROGRESS</h2>
         <span id="progressText">0%</span>
       </div>
       <div class="progress-bar-bg">
@@ -80,98 +84,96 @@
     <!-- DASHBOARD GRID -->
     <div class="dashboard-grid">
       
-      <!-- LEFT COLUMN: COMPLETED / CORE -->
+      <!-- LEFT COLUMN: COMPLETED -->
       <div class="panel">
-        <h3>✅ Core System (Completed)</h3>
+        <h3>✅ CORE INFRASTRUCTURE (DONE)</h3>
         <ul id="taskList">
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Firebase Auth</strong> Google Login with Persistent Session.</div>
+            <div><strong>Firebase Auth</strong><span>Google Login with persistent session (setPersistence).</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Firestore Sync</strong> Cloud Database connected.</div>
+            <div><strong>Firestore Database</strong><span>Cloud sync active. User data saved on login.</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>UI/UX</strong> Animated Core & Chat Console.</div>
+            <div><strong>Render Backend (Node.js)</strong><span>Live server at jarvis-7es3.onrender.com.</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Voice I/O</strong> Wake word ("Hey Jarvis") & TTS.</div>
+            <div><strong>AI Engine (Gemini)</strong><span>Smart fallback (3.8-flash -> 3.5-flash -> 2.5-flash).</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Backend API</strong> Render Node.js Server.</div>
+            <div><strong>3D Cinematic UI</strong><span>Holographic grid, CSS 3D dotted sphere, rotating rings.</span></div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Voice System (TTS/STT)</strong><span>JARVIS speaks replies. "Hey Jarvis" wake-word bug fixed.</span></div>
           </li>
         </ul>
       </div>
 
-      <!-- RIGHT COLUMN: PENDING / BUGS -->
+      <!-- RIGHT COLUMN: PENDING -->
       <div class="panel">
-        <h3>🚧 Pending / Bugs</h3>
+        <h3>🚧 PENDING / BUGS</h3>
         <ul id="taskList2">
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Haze Service Fix</strong> Resolve the non-working API service.</div>
+            <div><strong>Fix Haze Service</strong><span>External API/Service is currently down or failing.</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Render Cold Start</strong> Keep server awake with cron-job.</div>
+            <div><strong>Render Cold Start</strong><span>Server sleeps after 15m. Fix via cron-job.org ping.</span></div>
           </li>
           <li onclick="toggleTask(this)">
             <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-            <div><strong>Voice Customization</strong> Set Premium UK Male voice.</div>
+            <div><strong>Voice Customization</strong><span>Set premium UK Male voice (currently default).</span></div>
           </li>
         </ul>
       </div>
-    </div>
 
-    <!-- FUTURE ROADMAP & IDEAS -->
-    <div class="panel" style="margin-top: 20px;">
-      <h3>🚀 Future Roadmap (Suggested by AI)</h3>
-      <ul id="taskList3">
-        <li onclick="toggleTask(this)">
-          <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-          <div><strong>Context Memory (Short-term)</strong> JARVIS should remember the last 5-10 chat messages to hold a conversation naturally.</div>
-        </li>
-        <li onclick="toggleTask(this)">
-          <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-          <div><strong>Personal Knowledge Base</strong> Train JARVIS with custom prompts about your MCU Tracker and other projects so it answers like a personal assistant.</div>
-        </li>
-        <li onclick="toggleTask(this)">
-          <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-          <div><strong>Function Calling (Tools)</strong> Connect JARVIS to external APIs. E.g., "Open MCU tracker" or "Check my schedule".</div>
-        </li>
-        <li onclick="toggleTask(this)">
-          <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-          <div><strong>Multi-Language Support</strong> Add Hindi support so you can speak to JARVIS naturally.</div>
-        </li>
-      </ul>
-    </div>
+      <!-- ROADMAP -->
+      <div class="panel">
+        <h3>🚀 FUTURE ROADMAP</h3>
+        <ul id="taskList3">
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Context Memory</strong><span>JARVIS should remember last 5-10 chat messages.</span></div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Project Knowledge</strong><span>Train AI about MCU Tracker & SineVault projects.</span></div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Multi-Language</strong><span>Add Hindi language support for voice & text.</span></div>
+          </li>
+        </ul>
+      </div>
 
-    <!-- WARNING FOR AI -->
-    <div class="panel warning-panel">
-      <h3>⚠️ System Notes for Next AI Assistant</h3>
-      <p style="font-size: 13px; color: #b0c5d3; line-height: 1.6;">
-        1. <strong>Secrets:</strong> Never hardcode API keys in frontend. Use Render Environment Variables.<br>
-        2. <strong>DOM Elements:</strong> Always wrap DOM selections in <code>if($('elementId'))</code> to prevent crashing.<br>
-        3. <strong>Auth:</strong> Keep <code>setPersistence</code> enabled for Firebase so users don't log out on refresh.
-      </p>
+      <!-- AI NOTES -->
+      <div class="panel ai-notes">
+        <h3>⚠️ SYSTEM NOTES (For Next AI Assistant)</h3>
+        <ul>
+          <li><div><strong>1. DO NOT TOUCH:</strong><span>Keep setPersistence() in app.js. Removing it breaks the login session and causes black screens.</span></div></li>
+          <li><div><strong>2. SECURITY:</strong><span>Never put Gemini API keys in frontend (app.js). They belong in Render Environment Variables.</span></div></li>
+          <li><div><strong>3. DOM SAFETY:</strong><span>Always use if ($("elementId")) before manipulating DOM to prevent crashes if an ID is missing.</span></div></li>
+          <li><div><strong>4. WAKE WORD:</strong><span>The microphone must be stopped explicitly (recognition.stop()) when the wake word is detected to prevent infinite loops.</span></div></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 
   <!-- INTERACTIVE LOGIC -->
   <script>
-    // Load saved state from LocalStorage
     window.onload = function() {
-      const tasks = document.querySelectorAll('#taskList li, #taskList2 li, #taskList3 li');
-      
+      const tasks = document.querySelectorAll('li');
       tasks.forEach((task, index) => {
-        const isChecked = localStorage.getItem('jarvis_task_' + index) === 'true';
-        if (isChecked) task.classList.add('checked');
+        if (localStorage.getItem('jarvis_task_' + index) === 'true') task.classList.add('checked');
       });
-      
       updateProgress();
     };
 
@@ -182,16 +184,15 @@
     }
 
     function saveState() {
-      const tasks = document.querySelectorAll('#taskList li, #taskList2 li, #taskList3 li');
+      const tasks = document.querySelectorAll('li');
       tasks.forEach((task, index) => {
         localStorage.setItem('jarvis_task_' + index, task.classList.contains('checked'));
       });
     }
 
     function updateProgress() {
-      const tasks = document.querySelectorAll('#taskList li, #taskList2 li, #taskList3 li');
-      const checkedTasks = document.querySelectorAll('#taskList li.checked, #taskList2 li.checked, #taskList3 li.checked');
-      
+      const tasks = document.querySelectorAll('li');
+      const checkedTasks = document.querySelectorAll('li.checked');
       const percentage = Math.round((checkedTasks.length / tasks.length) * 100);
       
       document.getElementById('progressBar').style.width = percentage + '%';
