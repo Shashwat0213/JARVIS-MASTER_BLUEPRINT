@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>J.A.R.V.I.S — Master Blueprint</title>
+<title>J.A.R.V.I.S — Master Blueprint v2</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
@@ -30,16 +30,30 @@
   .container { max-width: 900px; margin: 0 auto; }
 
   /* Header */
-  .header { text-align: center; margin-bottom: 40px; }
-  .header h1 { font-family: 'Orbitron', sans-serif; font-size: 28px; letter-spacing: 2px; color: #fff; text-shadow: 0 0 15px var(--cyan); margin-bottom: 10px; }
+  .header { text-align: center; margin-bottom: 30px; }
+  .header h1 { font-family: 'Orbitron', sans-serif; font-size: 32px; letter-spacing: 3px; color: #fff; text-shadow: 0 0 15px var(--cyan); margin-bottom: 10px; }
   .header p { color: var(--muted); font-size: 14px; letter-spacing: 1px; }
   
-  /* Status Bar */
-  .status-bar { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
-  .badge { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; font-family: 'Share Tech Mono', monospace; }
-  .badge-green { background: rgba(0, 255, 136, 0.1); color: var(--green); border: 1px solid rgba(0, 255, 136, 0.3); }
-  .badge-cyan { background: rgba(0, 229, 255, 0.1); color: var(--cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
-  .badge-orange { background: rgba(255, 170, 0, 0.1); color: var(--orange); border: 1px solid rgba(255, 170, 0, 0.3); }
+  /* Progress Bar */
+  .progress-container {
+    background: var(--panel);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+  }
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .progress-header h2 { font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--cyan); margin: 0; }
+  .progress-header span { font-family: 'Orbitron', sans-serif; font-size: 18px; color: var(--green); font-weight: bold; }
+  .progress-bar-bg { width: 100%; height: 12px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+    box-shadow: 0 0 10px var(--green);
+  }
 
   /* Grid Layout */
   .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -65,7 +79,7 @@
     padding-bottom: 12px;
   }
   
-  /* Lists */
+  /* Interactive Lists */
   ul { list-style: none; }
   li {
     display: flex;
@@ -75,25 +89,30 @@
     color: #b0c5d3;
     margin-bottom: 15px;
     line-height: 1.6;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 8px;
+    border-radius: 8px;
   }
-  li strong { color: #fff; font-weight: 600; }
-  .icon-done { color: var(--green); flex-shrink: 0; margin-top: 2px; }
-  .icon-pending { color: var(--orange); flex-shrink: 0; margin-top: 2px; }
-  .icon-future { color: #555; flex-shrink: 0; margin-top: 2px; }
-  .icon-error { color: var(--red); flex-shrink: 0; margin-top: 2px; }
-
-  /* Code & Tags */
-  code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; color: var(--cyan); font-size: 13px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-  .tag {
-    background: rgba(0, 229, 255, 0.05);
-    color: var(--cyan);
-    border: 1px solid rgba(0, 229, 255, 0.2);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-family: 'Share Tech Mono', monospace;
+  li:hover { background: rgba(255,255,255,0.03); }
+  li strong { color: #fff; display: block; margin-bottom: 2px; }
+  
+  /* Custom Checkbox */
+  .checkbox {
+    width: 20px; height: 20px;
+    border: 2px solid var(--cyan);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+    transition: 0.2s;
   }
+  .checkbox svg { width: 14px; height: 14px; opacity: 0; transform: scale(0.5); transition: 0.2s; stroke: #000; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  
+  /* Checked State */
+  li.checked .checkbox { background: var(--green); border-color: var(--green); }
+  li.checked .checkbox svg { opacity: 1; transform: scale(1); }
+  li.checked strong, li.checked div { text-decoration: line-through; color: #555; }
+  li.checked { opacity: 0.6; }
 
   /* Warning Box */
   .warning-box {
@@ -105,6 +124,14 @@
   }
   .warning-box h3 { color: var(--orange); font-size: 16px; margin-bottom: 10px; font-family: 'Orbitron', sans-serif; }
   .warning-box p { font-size: 13px; color: #b0c5d3; line-height: 1.6; }
+
+  /* Code & Tags */
+  code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-family: 'Share Tech Mono', monospace; color: var(--cyan); font-size: 13px; }
+  
+  @media(min-width: 768px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .full-width { grid-column: 1 / -1; }
+  }
 </style>
 </head>
 <body>
@@ -112,75 +139,116 @@
     <!-- HEADER -->
     <div class="header">
       <h1>MASTER BLUEPRINT</h1>
-      <p>J.A.R.V.I.S. — Personal AI Assistant System</p>
-      <div class="status-bar">
-        <span class="badge badge-green">STATUS: LIVE</span>
-        <span class="badge badge-cyan">UI: CINEMATIC HUD</span>
-        <span class="badge badge-orange">AI: HYBRID (GROQ + GEMINI)</span>
+      <p>J.A.R.V.I.S. — Advanced Personal AI System</p>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-container">
+      <div class="progress-header">
+        <h2>Overall Project Progress</h2>
+        <span id="progressText">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
       </div>
     </div>
 
     <div class="grid">
-      <!-- 1. TECH STACK -->
+      <!-- 1. CORE & INFRASTRUCTURE -->
       <div class="panel">
-        <h2>⚙️ Tech Stack & Architecture</h2>
-        <ul>
-          <li><span class="icon-done">✔</span> <div><strong>Frontend:</strong> HTML5, Advanced CSS3 (Glassmorphism, Neon Glows), Vanilla JavaScript (ES6)।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Core Animation:</strong> Custom CSS 3D Transforms & SVG (रिएक्टर कोर और रिंग्स के लिए)।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Backend:</strong> Node.js + Express.js (Render पर होस्टेड)।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>AI Engine:</strong> Hybrid Fallback System (Groq Llama-3.3 ➔ Gemini 3.8 Flash)।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Memory:</strong> Firebase Firestore (Smart Memory के लिए)।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Voice Interface:</strong> Web Speech API (STT और TTS)।</div></li>
-        </ul>
-        <div class="tags">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">Vanilla JS</span>
-          <span class="tag">SVG</span>
-          <span class="tag">Firebase</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">Groq</span>
-          <span class="tag">Gemini API</span>
-        </div>
-      </div>
-
-      <!-- 2. COMPLETED TASKS -->
-      <div class="panel">
-        <h2>✅ Completed Features (Phase 1 & 2)</h2>
-        <ul>
-          <li><span class="icon-done">✔</span> <div><strong>Cinematic UI:</strong> 3D रिंग्स वाला क्लासिक JARVIS कोर, नियॉन ग्लो और शार्प ग्लास इफेक्ट।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Hybrid AI System:</strong> सबसे तेज़ Groq (Llama-3.3) पहले ट्राई होता है, फेल होने पर Gemini पर स्विच होता है।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Visual Feedback (Orb Colors):</strong> सुनते समय नीला, सोचते समय पीला, बोलते समय हरा और एरर पर लाल हो जाता है।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Voice Feedback:</strong> "Hey Jarvis" बोलने पर JARVIS आवाज़ में जवाब देता है "Yes Sir, I am listening"।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Hindi Support:</strong> माइक अब हिंदी (hi-IN) में भी कमांड सुन सकता है।</div></li>
-          <li><span class="icon-done">✔</span> <div><strong>Quick Access Modules:</strong> Voice Mode, My Projects, Device Tools, Memory (सभी काम कर रहे हैं)।</div></li>
+        <h2>⚙️ Core & Infrastructure</h2>
+        <ul id="taskList1">
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Backend Deployment</strong> Node.js सर्वर Render पर लाइव है।</div>
+          </li>
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Hybrid AI Fallback</strong> Groq (Llama-3.3) पहले, फिर Gemini 3.8 Flash।</div>
+          </li>
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Firebase Memory</strong> Firestore में बातचीत सेव करने की क्षमता।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Keep-Alive Ping</strong> Render सर्वर को सोने से रोकना (cron-job.org)।</div>
+          </li>
         </ul>
       </div>
 
-      <!-- 3. PENDING & KNOWN ISSUES -->
+      <!-- 2. UI & DESIGN -->
       <div class="panel">
-        <h2>🚧 Pending Bugs & Limitations</h2>
-        <ul>
-          <li><span class="icon-error">✖</span> <div><strong>Login Bypassed:</strong> फिलहाल लॉगिन हटा दिया गया है ताकि डैशबोर्ड सीधे खुले। इसे फिर से जोड़ना बाकी है।</div></li>
-          <li><span class="icon-error">✖</span> <div><strong>App Integration:</strong> JARVIS अभी WhatsApp या फोन के ऐप्स को कंट्रोल नहीं कर सकता।</div></li>
-          <li><span class="icon-pending">◉</span> <div><strong>Render Cold Start:</strong> फ्री टियर के कारण सर्वर सो जाता है। इसे <code>cron-job.org</code> से फिक्स करना है।</div></li>
+        <h2>🎨 UI & Design (HUD)</h2>
+        <ul id="taskList2">
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Classic Core</strong> 3D रिंग्स और नियॉन ब्लू ग्लो वाला JARVIS कोर।</div>
+          </li>
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Dynamic Orb Colors</strong> नीला (सुनना), पीला (सोचना), हरा (बोलना), लाल (एरर)।</div>
+          </li>
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Quick Access Modules</strong> Voice, Projects, Tools, Memory (कार्यशील)।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Real-Time Visuals</strong> होलोग्राम के अंदर 3D ग्राफ (मौसम/सिस्टम स्टेटस)।</div>
+          </li>
         </ul>
       </div>
 
-      <!-- 4. NEXT ROADMAP -->
+      <!-- 3. VOICE & AI FEATURES -->
       <div class="panel">
-        <h2>🚀 Next Roadmap (Phase 3 & 4)</h2>
-        <ul>
-          <li><span class="icon-future">○</span> <div><strong>Project Linking:</strong> "MCU ट्रैकर खोलो" बोलने पर सीधे आपके प्रोजेक्ट का URL खुलना।</div></li>
-          <li><span class="icon-future">○</span> <div><strong>Function Calling:</strong> JARVIS को आपके प्रोजेक्ट्स के API से जोड़ना ताकि वह डेटाबेस में बदलाव कर सके।</div></li>
-          <li><span class="icon-future">○</span> <div><strong>Native Mobile App:</strong> Termux का इस्तेमाल करके असली Android APK बनाना ताकि WhatsApp और फोन कंट्रोल हो सके।</div></li>
-          <li><span class="icon-future">○</span> <div><strong>Vision:</strong> कैमरे से फोटो लेकर उसे पहचानने की क्षमता (Gemini Vision)।</div></li>
+        <h2>🧠 Voice & AI Features</h2>
+        <ul id="taskList3">
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Voice Feedback</strong> "Yes Sir, I am listening" बोलने की क्षमता।</div>
+          </li>
+          <li class="checked" onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Hindi Support</strong> माइक अब हिंदी (hi-IN) में कमांड सुन सकता है।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Project Knowledge</strong> AI को MCU Tracker और SineVault के बारे में ट्रेन करना।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Vision Capability</strong> कैमरे से फोटो लेकर उसे पहचानना (Gemini Vision)।</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 4. ACTION & APP INTEGRATION -->
+      <div class="panel">
+        <h2>🛠️ Action & App Integration</h2>
+        <ul id="taskList4">
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Project Linking</strong> "MCU ट्रैकर खोलो" बोलने पर सीधे URL खुलना।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Function Calling</strong> आपके प्रोजेक्ट्स के API से जोड़ना (डेटाबेस अपडेट)।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>Native Mobile App</strong> Termux से असली Android APK बनाना।</div>
+          </li>
+          <li onclick="toggleTask(this)">
+            <div class="checkbox"><svg viewBox="0 0 24 24" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><strong>WhatsApp Control</strong> आवाज़ से WhatsApp मैसेज भेजना।</div>
+          </li>
         </ul>
       </div>
     </div>
 
-    <!-- 5. AI GUIDELINES -->
-    <div class="warning-box">
+    <!-- AI GUIDELINES -->
+    <div class="warning-box full-width">
       <h3>🤖 Instructions for Next AI Assistant</h3>
       <p>1. <strong>Security:</strong> API Keys (Gemini/Groq/Firebase) को कभी भी फ्रंटएंड (<code>app.js</code>) में हार्डकोड न करें। उन्हें हमेशा Render के Environment Variables में रखें।<br><br>
       2. <strong>DOM Safety:</strong> <code>app.js</code> में किसी भी एलिमेंट को एक्सेस करते समय <code>if ($("id"))</code> का इस्तेमाल करें ताकि पेज क्रैश (Black Screen) न हो।<br><br>
@@ -188,5 +256,47 @@
       4. <strong>Mic Logic:</strong> "Hey Jarvis" वाले लॉजिक को बहुत सावधानी से बदलें। इसमें <code>recognition.onend</code> और <code>recognition.stop()</code> का सही बैलेंस है ताकि वह लूप में न फँसे।</p>
     </div>
   </div>
+
+  <!-- INTERACTIVE LOGIC -->
+  <script>
+    // Load saved state from LocalStorage
+    window.onload = function() {
+      const tasks = document.querySelectorAll('li');
+      
+      tasks.forEach((task, index) => {
+        const isChecked = localStorage.getItem('jarvis_task_' + index);
+        if (isChecked === 'true') {
+          task.classList.add('checked');
+        } else if (isChecked === 'false') {
+          task.classList.remove('checked');
+        }
+      });
+      
+      updateProgress();
+    };
+
+    function toggleTask(element) {
+      element.classList.toggle('checked');
+      saveState();
+      updateProgress();
+    }
+
+    function saveState() {
+      const tasks = document.querySelectorAll('li');
+      tasks.forEach((task, index) => {
+        localStorage.setItem('jarvis_task_' + index, task.classList.contains('checked'));
+      });
+    }
+
+    function updateProgress() {
+      const tasks = document.querySelectorAll('li');
+      const checkedTasks = document.querySelectorAll('li.checked');
+      
+      const percentage = Math.round((checkedTasks.length / tasks.length) * 100);
+      
+      document.getElementById('progressBar').style.width = percentage + '%';
+      document.getElementById('progressText').textContent = percentage + '%';
+    }
+  </script>
 </body>
 </html>
